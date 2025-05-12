@@ -4,7 +4,7 @@ const router = require('express').Router();
 const { Country, Activity } = require('../db.js');
 
 router.get('/', async function(req, res, next){
-    res.send('hola')
+    res.send('alive.........')
 });
 router.post('/', async function(req, res, next){
     
