@@ -24,7 +24,7 @@ routerCountry.get('/', async function(req, res, next){
     if(countries.length === 0){
       // tenemos que llenar la base de datos con los paises, para ello tratemos los objetos objetinos por
       // la api axios, es decir, limpiar solo con las propiedades que necesitamos
-      let dat = await axios.get(`https://restcountries.eu/rest/v2/all`);
+      let dat = await axios.get(`https://restcountries.com/v3.1/all`);
       countries =  await dat.data.map( async (p, i) => {
         try{
           var newCountry = await Country.findOrCreate({where: {id: p.alpha3Code}, defaults: {
