@@ -23,13 +23,13 @@ routerCountry.get("/", async function (req, res, next) {
   if (countries.length === 0) {
     // tenemos que llenar la base de datos con los paises, para ello tratemos los objetos objetinos por
     // la api axios, es decir, limpiar solo con las propiedades que necesitamos
-    let dat = await axios.get(`https://restcountries.com/v3.1/all`);
+    let dat = await axios.get(`https://restcountries.com/v3.1/all?fields=name,flags,cca3,region,subregion,capital,population,area`);
     const newCountries = dat.data.map((p, i) => ({
       name: p.name?.common,
       id: p.cca3,
       continent: p.region,
       subRegion: p.subregion,
-      capital: p.capital ? p.capital[0] : "",
+      capital: p.capital && p.capital[0] ? p.capital[0] : "",
       population: p.population,
       area: p.area,
       img: p.flags.png,
@@ -66,7 +66,7 @@ routerCountry.get("/", async function (req, res, next) {
       console.log(err);
     }
   }
-  return res.status(200).send(countries);
+    return res.status(200).send(countries);
 });
 
 routerCountry.get("/all", async function (req, res, next) {
